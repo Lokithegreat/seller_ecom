@@ -39,8 +39,12 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   image_picker: ^0.8.5
-  firebase_core: ^1.16.0
+  
   firebase_storage: ^10.2.15
+
+  firebase_core: ^1.16.0
+ 
+ 
   
   get: ^4.6.1
 

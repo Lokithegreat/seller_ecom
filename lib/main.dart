@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:seller/upload_profile_image.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:get/get.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
