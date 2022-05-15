@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seller/firebase_options.dart';
 import 'package:seller/upload_profile_image.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -7,7 +8,9 @@ import 'package:get/get.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform, //This line is necessary
+  );
   runApp(const MyApp());
 }
 

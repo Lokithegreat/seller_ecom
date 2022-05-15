@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:seller/firebase_services.dart';
 
 class UploadProfileImage extends StatefulWidget {
   const UploadProfileImage({Key? key}) : super(key: key);
@@ -11,6 +12,10 @@ class UploadProfileImage extends StatefulWidget {
 }
 
 class _UploadProfileImageState extends State<UploadProfileImage> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  TextEditingController modelController = TextEditingController();
+
   final title = TextEditingController();
   final quantity = TextEditingController();
   final price = TextEditingController();
@@ -87,6 +92,13 @@ class _UploadProfileImageState extends State<UploadProfileImage> {
     }
   }
 
+  late FirebaseServices firebaseServices;
+  @override
+  void initState() {
+    firebaseServices = FirebaseServices();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,17 +162,24 @@ class _UploadProfileImageState extends State<UploadProfileImage> {
             ),
             TextFormField(
               decoration: InputDecoration(hintText: 'title'),
-              controller: title,
+              controller: nameController,
             ),
             TextFormField(
-              decoration: InputDecoration(hintText: 'quantity'),
-              controller: quantity,
+              decoration: InputDecoration(hintText: 'model'),
+              controller: modelController,
             ),
             TextFormField(
               decoration: InputDecoration(hintText: 'price'),
-              controller: price,
+              controller: priceController,
             ),
-            ElevatedButton(onPressed: () {}, child: Text('Submit'))
+            ElevatedButton(
+                onPressed: () {
+                  firebaseServices.addItem(
+                      name: nameController.value.text,
+                      model: modelController.value.text,
+                      price: priceController.value.text);
+                },
+                child: Text('Submit'))
           ],
         ),
       ),
